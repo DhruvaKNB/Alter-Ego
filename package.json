@@ -1,0 +1,11 @@
+{
+  "name": "epiphany",
+  "version": "1.0.0",
+  "description": "",
+  "main": "psych.js",
+  "scripts": {
+    "start": "node user.js node psych.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

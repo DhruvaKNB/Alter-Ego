@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <link href="/style.css" type="text/css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <body id="ab">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4" style="height:100vh;background-color:#FF0153;overflow:hidden">
+            <div class="row">
+              <img src="https://image.flaticon.com/icons/svg/306/306473.svg" style="width:100%; margin-top:40px" class="img-fluid" alt="Responsive image">
+            </div>
+            <div class="row">
+              <% var src="https://image.flaticon.com/icons/svg/306/306473.svg" %>
+              <% if(user.hasOwnProperty('age')){ %>
+                <% src="https://cdn1.iconfinder.com/data/icons/circle-outlines/512/User_Account_Person_Avatar_Profile_Man-256.png" %>
+              <% } %>
+              <h1> <%= user.userid %> </h1>
+            </div>
+            <div class="row">
+              <div id="chats" class="list-group">
+              </div>
+            </div>
+          </div>
+            <div id="title" class="col-sm-8 frame">
+                <ul></ul>
+                <div>
+                    <div class="msj-rta macro" style="margin:auto">
+                        <div class="text text-r" style="background:whitesmoke !important">
+                            <input class="mytext" placeholder="Type a message"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div id="a">
+        <%= JSON.stringify(user) %>
+      </div>
+      <script
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+      <script>
+        window.onload=function(){
+           window.user=JSON.parse($('#a').html());
+           $('#a').remove();
+           window.chat=true;
+           window.dest="";
+           var g=JSON.parse(localStorage.getItem('history')) || {};
+           for (var uid in g){
+              $('#chats').append(`<button type="button" class="list-group-item list-group-item-action"> &nbsp; <strong>${uid}</strong> &nbsp; </button>`);
+           }
+           function fetch(){
+             if(chat){
+            if(user.hasOwnProperty('age'))
+              $.post({url:"http://localhost:5000/user/fetch", data:{uid:user.userid},success:function(data){
+                var t=JSON.parse(localStorage.getItem('history')) || {};
+                for(let i=0;i<data.length;i++){
+                  if(data[i].source==dest){
+                    var control = '<li style="width:100%;">' +
+                                    '<div class="msj-rta macro">' +
+                                        '<div class="text text-r">' +
+                                            '<p>'+data[i].content+'</p>' +
+                                        '</div>' +
+                                    '<div class="avatar" style="padding:0px 0px 0px 10px !important"></div>' +
+                              '</li>';
+                              $('ul').append(control);
+                  }
+                  if(t.hasOwnProperty(data[i].source)){
+                    t[data[i].source].push({sent:false,content:data[i].content});
+                  }
+                  else {
+                    t[data[i].source]=[];
+                    t[data[i].source].push({sent:false,content:data[i].content});
+                  }
+                }
+                localStorage.setItem('history',JSON.stringify(t));
+              },complete:function(){setTimeout(fetch,1000);}});
+            else
+              $.post({url:"http://localhost:3000/psych/fetch", data:{uid:user.userid},success:function(data){
+                var t=JSON.parse(localStorage.getItem('history')) || {};
+                for(let i=0;i<data.length;i++){
+                  if(data[i].source==dest){
+                    var control = '<li style="width:100%;">' +
+                                    '<div class="msj-rta macro">' +
+                                        '<div class="text text-r">' +
+                                            '<p>'+data[i].content+'</p>' +
+                                        '</div>' +
+                                    '<div class="avatar" style="padding:0px 0px 0px 10px !important"></div>' +
+                              '</li>';
+                              $('ul').append(control);
+                  }
+                  if(t.hasOwnProperty(data[i].source)){
+                    t[data[i].source].push({sent:false,content:data[i].content});
+                  }
+                  else {
+                    t[data[i].source]=[];
+                    t[data[i].source].push({sent:false,content:data[i].content})
+                  }
+                }
+                localStorage.setItem('history',JSON.stringify(t));
+
+            },complete:function(){setTimeout(fetch,1000);}});
+          }
+          }
+          window.stop=function(){
+            chat=false;
+          }
+          $('.list-group-item').click(function(){
+            $('ul').html('');
+            dest=$(this).children().html();
+            console.log(dest);
+            var control = "";
+            var i=JSON.parse(localStorage.getItem('history'));
+            console.log(i[dest]);
+            if(i.hasOwnProperty(dest)){
+              for(let j=0;j<i[dest].length;j++)
+              {
+                if (i[dest][j].sent){
+                 control = '<li style="width:100%">' +
+                           '<div class="msj macro">' +
+                               '<div class="text text-l">' +
+                                   '<p>'+ i[dest][j].content +'</p>' +
+                               '</div>' +
+                           '</div>' +
+                       '</li>';
+       }else{
+           control = '<li style="width:100%;">' +
+                           '<div class="msj-rta macro">' +
+                               '<div class="text text-r">' +
+                                   '<p>'+i[dest][j].content+'</p>' +
+                               '</div>' +
+                           '<div class="avatar" style="padding:0px 0px 0px 10px !important"></div>' +
+                     '</li>';
+       }
+       $("ul").append(control);
+              }
+            }
+          });
+          $(".mytext").on("keyup", function(e){
+    if (e.which == 13){
+        var text = $(this).val();
+        if (text !== ""){
+            send(text);
+            $(this).val('');
+        }
+    }
+});
+          window.send=function(text){
+            if(user.hasOwnProperty('age')&& dest!=""){
+              $.post({url:"http://localhost:5000/user/send",data:{source:user.userid,dest:dest,content:text},success:function(data){
+                var t=JSON.parse(localStorage.getItem('history')) || {};
+                control = '<li style="width:100%">' +
+                          '<div class="msj macro">' +
+                              '<div class="text text-l">' +
+                                  '<p>'+ text +'</p>' +
+                              '</div>' +
+                          '</div>' +
+                      '</li>';
+                      $('ul').append(control);
+                if(t.hasOwnProperty(dest))
+                  t[dest].push({sent:true,content:text});
+                else{
+                  t[dest]=[];
+                  t[dest].push({sent:true,content:text});
+                }
+                localStorage.setItem('history',JSON.stringify(t));
+              }});
+            }
+            else{
+              $.post({url:"http://localhost:3000/psych/send",data:{source:user.userid,dest:dest,content:text},success:function(data){
+                var t=JSON.parse(localStorage.getItem('history')) || {};
+                control = '<li style="width:100%">' +
+                          '<div class="msj macro">' +
+                              '<div class="text text-l">' +
+                                  '<p>'+ text +'</p>' +
+                              '</div>' +
+                          '</div>' +
+                      '</li>';
+                      $('ul').append(control);
+                if(t.hasOwnProperty(dest))
+                  t[dest].push({sent:true,content:text});
+                else{
+                  t[dest]=[];
+                  t[dest].push({sent:true,content:text});
+                }
+                localStorage.setItem('history',JSON.stringify(t));
+              }});
+            }
+          }
+          fetch(user,chat);
+        };
+        </script>
+    </body>
+</html>

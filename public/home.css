@@ -1,0 +1,85 @@
+body{
+  background-color: black;
+  font-family: 'Open Sans';
+  /*opacity:0.6;*/
+}
+#front{
+  min-height: 100vh;
+
+}
+#bg3{
+  width:100vw;
+  height:120vh;
+  position: fixed;
+  top:0;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.nav,.nav-wrapper{
+  background-color: #7a1f1f;
+}
+.navb{
+  font-size: 1.3vw;
+}
+#head{
+  font-size:10vw;
+  color:#D8AA33;
+  font-family: 'Pacifico', cursive;
+}
+#tag{
+  font-size: 2.3vw;
+  color: white;
+}
+#front > .row {
+  transform: translateY(20vh);
+}
+.carousel{
+  height: 40vw;
+}
+#about{
+  margin-bottom: 15vw;
+}
+#signin{
+  margin-bottom: 7vw;
+}
+/*.carousel-item{
+  background-color: red;
+}*/
+#signuphide{
+  /*height: 52vw;*/
+  color:white;
+  text-align: center;
+  margin-bottom: 15vw;
+}
+.page-footer{
+  background-color: #681517;
+}
+h1{
+  font-size: 5vw;
+}
+h2{
+  font-size:4vw;
+}
+h3{
+  font-size: 3vw;
+}
+h4{
+  font-size: 2vw;
+}
+h5{
+  font-size: 1vw;
+}
+#forme,#formu{
+  color:white;
+}
+form{
+  color:white;
+  margin-bottom: 7vw;
+}
+ form > .submit, button{
+   border: none;
+   border-radius: 0.2vw;
+   color: black;
+   width:14vw; font-size:2vw;
+ }

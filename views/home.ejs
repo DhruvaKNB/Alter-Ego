@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/home.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Alter Ego</title>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <div id="front">
+      <nav class="right hide-on-small-and-down">
+        <div class="nav-wrapper">
+          <ul class="right hide-on-small-and-down">
+            <li><a href="#about" class="navb">About</a></li>
+            <li><a href="#signup" class="navb">Sign up</a></li>
+            <li><a href="#signin" class="navb">Sign in</a></li>
+            <li><a href="#contact" class="navb">Contact us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <img id="bg3" src="/bg3.jpg">
+      <br>
+      <div class="row right-align" id="sc">
+          <div id="head" class="flow-text right-align">alter-ego&nbsp;
+          </div>
+          <div id="tag" class="flow-text right-align ">YOUR TRUSTED FRIEND &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+      </div>
+    </div>
+    <div id="about">
+      <div class="carousel carousel-slider center" data-indicators="true">
+        <div class="carousel-item white-text" href="#one!">
+          <div style="position:relative; top:10vw;">
+            <p><h1 style="font-size:4vw" class="white-text container"> Let's promote Adolescent Education </h1></p>
+            <p><h2 class="white-text container"> </h2></p>
+          </div>
+        </div>
+        <div class="carousel-item white-text" href="#two!">
+          <div style="position:relative; top:10vw;">
+            <p><h1 style="font-size:4vw" class="white-text container"> Connect directly with our experts !</h1></p>
+            <p><h2 class="white-text container"> First platform that will connect children and teenagers directly to our experts team consisting of experienced psychologists, psychiatrists and professional counsellor. </h2></p>
+          </div>
+        </div>
+        <div class="carousel-item white-text" href="#three!">
+          <div style="position:relative; top:10vw;">
+            <p><h1 style="font-size:4vw" class="white-text container"> Share your personal experience !</h1></p>
+            <p><h2 class="white-text container"> One platform where you can share your experience anonymously and also learn from others experience by reading their stories. </h2></p>
+          </div>
+        </div>
+        <div class="carousel-item white-text" href="#four!">
+          <div style="position:relative; top:10vw;">
+            <p><h1 style="font-size:4vw" class="white-text container"> Read about common adolescent issues !</h1></p>
+            <p><h2 class="white-text container"> Yes ! We have millions of articles about all the issues that you can probably face. Learn about the cause of your troubles and find solutions for the same.   </h2></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="signup">
+      <div id="signuphide" style="text-align:centre">
+        <div class="row"><br>
+          <h1>SIGN UP</h1>
+          <h2>Create your account !</h2>
+        </div>
+          <div class="row">
+            <div id="signup1" class="col s6">
+              <h3> I'm a student </h3>
+              <button id="sups"> STUDENT </button>
+            </div>
+            <div id="signup2" class="col s6">
+              <h3>I'm an expert </h3>
+              <button id="supe"> EXPERT </button>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="signin" >
+      <div id="hidesi" class="container">
+        <div id="sign-in">
+            <h1 style="color:white">Sign in as</h1><br>
+        </div>
+        <div>
+          <button style="margin:2vw; width:14vw; font-size:2vw;" id="sis"> STUDENT </button><br>
+          <button style="margin:2vw; width:14vw; font-size:2vw;" id="sie"> EXPERT </button>
+      </div>
+    </div>
+  </div>
+
+    <div id="contact">
+      <footer class="page-footer">
+         <div class="container">
+           <div class="row">
+             <div class="col l6 s12">
+
+               <h4 class="grey-text text-lighten-4">For more queries connect with us</h4>
+             </div>
+             <div class="col l4 offset-l2 s12">
+               <h5 class="white-text">Connect with us </h5>
+               <ul>
+                 <li><a class="grey-text text-lighten-3" href="https://github.com/dhruvaknb" target="_blank"> Dhruva Bhagdikar </a></li>
+                 <li><a class="grey-text text-lighten-3" href="https://github.com/21sudhanshu" target="_blank">Sudhanshu Tiwari</a></li>
+                 <li><a class="grey-text text-lighten-3" href="https://github.com/riyak1998" target="_blank">Riya</a></li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <div class="footer-copyright">
+           <div class="container">
+           © 2018 Copyright Text
+           </div>
+         </div>
+       </footer>
+
+    </div>
+
+    <script>
+      $(document).ready(function(){
+         $('.carousel').carousel();
+         window.replace=`  <div class="row"><br>
+             <h1>SIGN UP</h1>
+             <h2>Create your account !</h2>
+           </div>
+             <div class="row">
+               <div id="signup1" class="col s6">
+                 <h3> I'm a student </h3>
+                 <button id="sups"> STUDENT </button>
+               </div>
+               <div id="signup2" class="col s6">
+                 <h3>I'm an expert </h3>
+                 <button id="supe"> EXPERT </button>
+               </div>
+             </div>`;
+         $(window).scroll(function(){
+             $("#sc").css("opacity", 1 - $(window).scrollTop() / 250);
+           });
+           $('#a').click(function(){
+             $('#signup').children.remove();
+             $('#signup').append(replace);
+           });
+           $('#sups').click(function(){
+             console.log("in sups");
+             $('#signuphide').remove();
+             $('#signup').append(`<div id="formu">
+               <div class="container">
+               <h3>Enter your details </h3>
+                 <div class="row">
+                   <form action="http://localhost:5000/signup/user" method="post" class="col s12">
+                     <div class="row">
+                       <div class="input-field col s6">
+                         <input id="first_name" type="text" class="validate" name="fname">
+                         <label for="first_name">First Name</label>
+                       </div>
+                       <div class="input-field col s6">
+                         <input id="last_name" type="text" class="validate" name="lname">
+                         <label for="last_name">Last Name</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="age" type="number" class="validate" name="age">
+                         <label for="age">Age</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="username" type="text" class="validate" name="userid">
+                         <label for="username">Username</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="password" type="password" class="validate" name="password">
+                         <label for="password">Password</label>
+                       </div>
+                     </div>
+                     <input id="a" class="submit" type="submit">
+                   </form>
+                 </div>
+               </div>
+             </div>`);
+           });
+           $('#supe').click(function(){
+              console.log("in supe");
+             $('#signuphide').remove();
+             $('#signup').append(`<div id="forme">
+               <div class="container">
+               <h3>Enter your details </h3>
+                 <div class="row">
+                   <form action="http://localhost:5000/signup/psych" method="post" class="col s12">
+                     <div class="row">
+                       <div class="input-field col s6">
+                         <input id="first_name" type="text" class="validate" name="fname">
+                         <label for="first_name">First Name</label>
+                       </div>
+                       <div class="input-field col s6">
+                         <input id="last_name" type="text" class="validate" name="lname">
+                         <label for="last_name">Last Name</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="email" type="email" class="validate">
+                         <label for="email">Email</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="email" type="number" class="validate" name="regno">
+                         <label for="email">Registration Number</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="username" type="text" class="validate" name="userid">
+                         <label for="username">Username</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <input id="password" type="password" class="validate" name="password">
+                         <label for="password">Password</label>
+                       </div>
+                     </div>
+                     <input id="a" class="submit" type="submit">
+                   </form>
+                 </div>
+               </div>
+             </div>`);
+           });
+
+           $('#sis').click(function(){
+             $('#hidesi').remove();
+             $('#signin').append(`<div id="fsigns">
+               <div class="container">
+                 <div class="row">
+                   <form action="http://localhost:5000/login/user" method="post" class="col s12">
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">account_circle</i>
+                         <input id="username" type="text" class="validate" name="userid">
+                         <label for="username">Username</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">lock</i>
+                         <input id="password" type="password" class="validate" name="password">
+                         <label for="password">Password</label>
+                       </div>
+                     </div>
+                     <input class="submit" type="submit">
+                   </form>
+                 </div>
+               </div>
+             </div>`);
+           });
+
+           $('#sie').click(function(){
+             $('#hidesi').remove();
+             $('#signin').append(`<div id="fsigne">
+               <div class="container">
+                 <div class="row">
+                   <form action="http://localhost:5000/login/psych" method="post" class="col s12">
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">account_circle</i>
+                         <input id="username" type="text" class="validate" name="userid">
+                         <label for="username">Username</label>
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">lock</i>
+                         <input id="password" type="password" class="validate" name="password">
+                         <label for="password">Password</label>
+                       </div>
+                     </div>
+                     <input class="submit" type="submit">
+                   </form>
+                 </div>
+               </div>
+             </div>`);
+           });
+
+
+    });
+  </script>
+
+
+  </body>
+</html>

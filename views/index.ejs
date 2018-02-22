@@ -4,17 +4,13 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <body id="ab">
-      <div class="container">
+      <div class="container" style="width:80%">
         <div class="row">
-          <div class="col-sm-4" style="height:100vh;background-color:#FF0153;overflow:hidden">
+          <div class="col-sm-3" style="box-shadow: 1px 1px 21px -2px rgba(0,0,0,0.75);height:100vh;background-color:#A30000;overflow:hidden">
             <div class="row">
-              <img src="https://image.flaticon.com/icons/svg/306/306473.svg" style="width:100%; margin-top:40px" class="img-fluid" alt="Responsive image">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQ7QtCYPSSN-soP_UKiMvFYFUrriVO8MmG1xFkm0NyTHQjAR6Bg" style="width:90%; margin:20px auto" class="img-fluid" alt="Responsive image">
             </div>
             <div class="row">
-              <% var src="https://image.flaticon.com/icons/svg/306/306473.svg" %>
-              <% if(user.hasOwnProperty('age')){ %>
-                <% src="https://cdn1.iconfinder.com/data/icons/circle-outlines/512/User_Account_Person_Avatar_Profile_Man-256.png" %>
-              <% } %>
               <h1> <%= user.userid %> </h1>
             </div>
             <div class="row">
@@ -22,7 +18,7 @@
               </div>
             </div>
           </div>
-            <div id="title" class="col-sm-8 frame">
+            <div id="title" class="col-sm-9 frame" style="box-shadow: 1px 1px 21px -2px rgba(0,0,0,0.75);">
                 <ul></ul>
                 <div>
                     <div class="msj-rta macro" style="margin:auto">
@@ -43,7 +39,7 @@
         crossorigin="anonymous"></script>
       <script>
         window.onload=function(){
-           window.user=JSON.parse($('#a').html());
+           window.myuser=JSON.parse($('#a').html());
            $('#a').remove();
            window.chat=true;
            window.dest="";
@@ -53,8 +49,8 @@
            }
            function fetch(){
              if(chat){
-            if(user.hasOwnProperty('age'))
-              $.post({url:"http://localhost:5000/user/fetch", data:{uid:user.userid},success:function(data){
+            if(myuser.hasOwnProperty('age'))
+              $.post({url:"http://localhost:5000/user/fetch", data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -78,7 +74,7 @@
                 localStorage.setItem('history',JSON.stringify(t));
               },complete:function(){setTimeout(fetch,1000);}});
             else
-              $.post({url:"http://localhost:3000/psych/fetch", data:{uid:user.userid},success:function(data){
+              $.post({url:"http://localhost:3000/psych/fetch", data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -148,8 +144,8 @@
     }
 });
           window.send=function(text){
-            if(user.hasOwnProperty('age')&& dest!=""){
-              $.post({url:"http://localhost:5000/user/send",data:{source:user.userid,dest:dest,content:text},success:function(data){
+            if(myuser.hasOwnProperty('age')&& dest!=""){
+              $.post({url:"http://localhost:5000/user/send",data:{source:myuser.userid,dest:dest,content:text},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 control = '<li style="width:100%">' +
                           '<div class="msj macro">' +
@@ -169,7 +165,7 @@
               }});
             }
             else{
-              $.post({url:"http://localhost:3000/psych/send",data:{source:user.userid,dest:dest,content:text},success:function(data){
+              $.post({url:"http://localhost:3000/psych/send",data:{source:myuser.userid,dest:dest,content:text},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 control = '<li style="width:100%">' +
                           '<div class="msj macro">' +
@@ -189,7 +185,7 @@
               }});
             }
           }
-          fetch(user,chat);
+          fetch(myuser,chat);
         };
         </script>
     </body>

@@ -12,7 +12,7 @@ body{
   height:120vh;
   position: fixed;
   top:0;
-  opacity: 0.2;
+  opacity: 0.3;
   z-index: -1;
 }
 
@@ -37,15 +37,19 @@ body{
 .carousel{
   height: 40vw;
 }
+
 #about{
   margin-bottom: 15vw;
 }
 #signin{
   margin-bottom: 7vw;
 }
-/*.carousel-item{
-  background-color: red;
-}*/
+/* .carousel-item{
+  background-color: black;
+}
+.carousel{
+  opacity: 0.7;
+} */
 #signuphide{
   /*height: 52vw;*/
   color:white;
@@ -53,8 +57,13 @@ body{
   margin-bottom: 15vw;
 }
 .page-footer{
-  background-color: #681517;
+  background-color:#651a1a;
+  opacity: 1;
 }
+/* #contact{
+  background-color: #cb3434;
+  opacity: 1;
+} */
 h1{
   font-size: 5vw;
 }
@@ -82,4 +91,7 @@ form{
    border-radius: 0.2vw;
    color: black;
    width:14vw; font-size:2vw;
+ }
+ #hidesi{
+   text-align: right;
  }

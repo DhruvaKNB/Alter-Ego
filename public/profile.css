@@ -1,0 +1,63 @@
+.container{
+  min-height: 100vh;
+  width: 80%;
+  margin: auto;
+  background-color:#A30000;
+  border-radius: 0.5vw;
+  box-shadow: 0px 0px 4px 3px rgba(148,146,148,0.85);
+}
+#tab,#prof,#text{
+  min-height: 100vh;
+}
+.container .row{
+  margin: 0;
+}
+
+#tab > .row > .col{
+  padding: 2vw;
+  text-align: center;
+  font-size: 3vw;
+}
+#tab{
+  background-color:#A30000;
+  text-align: center;
+}
+#text{
+  background-color:#F5F2EF;
+  box-shadow: 0px 0px 4px 3px rgba(148,146,148,0.85);
+
+}
+a{
+  text-decoration: none;
+  color:inherit;
+}
+#tab > .row > .col:active{
+  background-color: #F2F2F2
+}
+#tab > .row > .col:hover{
+  background-color: #F2F2F2
+}
+#tab > .row > img{
+  width:9vw;
+  margin:3vw;
+}
+#text > img {
+  height: 25vw;
+}
+img{
+  width:15vw;
+  height: 17vw;
+}
+p{
+  margin: 0;
+}
+#tab > .row > img{
+  margin: 0;
+}
+.row h3{
+  margin:3vh auto;
+}
+.row > .col > button{
+  background-color: transparent;
+  border:none;
+}

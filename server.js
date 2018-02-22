@@ -1,5 +1,5 @@
 const express=require('express');
-const  execute =require('child_process');
+const execute =require('child_process');
 const app=express();
 const sql = require('mysql');
 const bodyParser=require('body-parser');
@@ -27,7 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // app.use(passport1.initialize());
 // app.use(passport1.session());
-let port=process.env.PORT || 5000;
+let port=5000;
 let connection=sql.createConnection(config);
 app.listen(port,function(){
   console.log("Server is Running");
@@ -219,14 +219,31 @@ app.post('/psych/fetch',function(req,res){
     });
   });
 });
-app.get('/user/logout',function(req,res){
+app.get('/logout',function(req,res){
+
   req.logout();
-  res.render('home.ejs');
+  res.send(`http://localhost:${port}/`);
 });
 app.get('/',function(req,res){
   res.render('home.ejs');
 })
 app.get('/index',function(req,res){
   console.log(req.user);
-  res.render('index.ejs',{user:req.user});
+  // res.render('index.ejs',{user:req.user});
+  res.render('profile.ejs',{user:req.user});
 })
+app.get('/user/message',function(req,res){
+  // res.render('index.ejs',{user:req.user});
+  res.send(`http://localhost:${port}/index2`);
+});
+app.get('/index2',function(req,res){
+  res.render('index.ejs',{user:req.user});
+});
+app.post('/user/delete',function(req,res){
+  console.log(req.body);
+  res.send(`http://localhost:${port}/`);
+});
+app.post('/user/modify',function(req,res){
+  console.log(req.body);
+  res.sendStatus(200);
+});

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Profile Page</title>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous">
+    </script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m3" id="tab">
+          <div class="row">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQ7QtCYPSSN-soP_UKiMvFYFUrriVO8MmG1xFkm0NyTHQjAR6Bg" style="width:90%; margin:20px auto" class="img-fluid" alt="Responsive image">
+          </div>
+          <div class="row">
+            <h3> <%= user.userid %> </h3>
+          </div>
+          <div class="row">
+            <div class="col s4 m12">
+              <button id="msg">
+                <i class="small material-icons" title="messages">message</i>
+              </button>
+            </div>
+            <div class="col s4 m12">
+              <button id="settings">
+                <i class="small material-icons" title="settings">settings</i>
+              </button>
+            </div>
+            <div class="col s4 m12">
+              <button id="logout">
+                <i class="small material-icons" title="logout">lock</i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m9" id="text">
+          <div class="input-field col s12">
+            <input placeholder="Search" id="search" type="text" class="validate">
+          </div>
+          <div class="row">
+            <div class="col s12 m6">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="http://1.bp.blogspot.com/-6KkUO7WQLLM/UuhuLGU0_9I/AAAAAAAAKN8/B_ODlqJ9lPM/w1200-h630-p-k-no-nu/Peer+Pressure.jpg">
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">Peer Pressure<i class="tiny material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"> Peer Pressure <i class="material-icons right">close</i></span>
+                  <p>Are you a teen? If so you might be facing this problem. It’s not a big problem, it’s a HUGE problem. I’m talking about peer pressure. There are both positive and negative types of peer pressure. </p>
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="http://dicassobresaude.com/wp-content/uploads/2017/06/o-que-e-dislexia-e-como-tratar-seus-sintomas-de-maneira-adequada-2.jpg">
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">Depression<i class="tiny material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"> Depression <i class="material-icons right">close</i></span>
+                  <p>Depression is a state of low mood and aversion to activity. It may be a normal reaction to occurring life events or circumstances, a symptom of a medical condition, a side effect of drugs, etc.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="card">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="https://cdn.theatlantic.com/assets/media/img/mt/2015/04/RTR49EZD/lead_960.jpg?1430923540">
+                  </div>
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4"> Smoking <i class="tiny material-icons right">more_vert</i></span>
+                  </div>
+                  <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4"> Smoking <i class="material-icons right">close</i></span>
+                    <p>So it's important to make sure kids understand the dangers of smoking and using chewing tobacco: Tobacco cigarettes are the leading cause of preventable deaths in the United States, and can cause cancer, heart disease, and lung disease.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12 m6">
+                <div class="card">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="https://cdn.cnn.com/cnnnext/dam/assets/120521043619-clinton-steyer-internet-horizontal-large-gallery.jpg">
+                  </div>
+                  <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4"> Cyberspace addiction<i class="tiny material-icons right">more_vert</i></span>
+                  </div>
+                  <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4"> Cyberspace addiction <i class="tiny material-icons right">close</i></span>
+                    <p>Internet addictions are relatively new, so many people don't know what it is. Learn about the causes and signs and symptoms of internet addiction and what treatment options exist.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>  <!--  text -->
+      </div>
+    </div>
+    <div id="a">
+      <%= JSON.stringify(user) %>
+    </div>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous">
+    </script>
+    <script>
+      window.onload=function(){
+        window.myuser=JSON.parse($('#a').html());
+        $('#a').remove();
+         $('#msg').click(function(){
+           $.get({
+             url:'/user/message',
+             success:function(data){
+               window.location=data;
+             }
+           });
+         });
+         var replace2=`<div class="input-field col s12">
+           <input placeholder="Search" id="search" type="text" class="validate">
+         </div>
+         <div class="row">
+           <div class="col s12 m6">
+             <div class="card">
+               <div class="card-image waves-effect waves-block waves-light">
+                 <img class="activator" src="http://1.bp.blogspot.com/-6KkUO7WQLLM/UuhuLGU0_9I/AAAAAAAAKN8/B_ODlqJ9lPM/w1200-h630-p-k-no-nu/Peer+Pressure.jpg">
+               </div>
+               <div class="card-content">
+                 <span class="card-title activator grey-text text-darken-4">Peer Pressure<i class="tiny material-icons right">more_vert</i></span>
+               </div>
+               <div class="card-reveal">
+                 <span class="card-title grey-text text-darken-4"> Peer Pressure <i class="material-icons right">close</i></span>
+                 <p>Are you a teen? If so you might be facing this problem. It’s not a big problem, it’s a HUGE problem. I’m talking about peer pressure. There are both positive and negative types of peer pressure. </p>
+               </div>
+             </div>
+           </div>
+           <div class="col s12 m6">
+             <div class="card">
+               <div class="card-image waves-effect waves-block waves-light">
+                 <img class="activator" src="http://dicassobresaude.com/wp-content/uploads/2017/06/o-que-e-dislexia-e-como-tratar-seus-sintomas-de-maneira-adequada-2.jpg">
+               </div>
+               <div class="card-content">
+                 <span class="card-title activator grey-text text-darken-4">Depression<i class="tiny material-icons right">more_vert</i></span>
+               </div>
+               <div class="card-reveal">
+                 <span class="card-title grey-text text-darken-4"> Depression <i class="material-icons right">close</i></span>
+                 <p>Depression is a state of low mood and aversion to activity. It may be a normal reaction to occurring life events or circumstances, a symptom of a medical condition, a side effect of drugs, etc.</p>
+               </div>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col s12 m6">
+               <div class="card">
+                 <div class="card-image waves-effect waves-block waves-light">
+                   <img class="activator" src="https://cdn.theatlantic.com/assets/media/img/mt/2015/04/RTR49EZD/lead_960.jpg?1430923540">
+                 </div>
+                 <div class="card-content">
+                   <span class="card-title activator grey-text text-darken-4"> Smoking <i class="tiny material-icons right">more_vert</i></span>
+                 </div>
+                 <div class="card-reveal">
+                   <span class="card-title grey-text text-darken-4"> Smoking <i class="material-icons right">close</i></span>
+                   <p>So it's important to make sure kids understand the dangers of smoking and using chewing tobacco: Tobacco cigarettes are the leading cause of preventable deaths in the United States, and can cause cancer, heart disease, and lung disease.</p>
+                 </div>
+               </div>
+             </div>
+             <div class="col s12 m6">
+               <div class="card">
+                 <div class="card-image waves-effect waves-block waves-light">
+                   <img class="activator" src="https://cdn.cnn.com/cnnnext/dam/assets/120521043619-clinton-steyer-internet-horizontal-large-gallery.jpg">
+                 </div>
+                 <div class="card-content">
+                   <span class="card-title activator grey-text text-darken-4"> Cyberspace addiction<i class="tiny material-icons right">more_vert</i></span>
+                 </div>
+                 <div class="card-reveal">
+                   <span class="card-title grey-text text-darken-4"> Cyberspace addiction <i class="tiny material-icons right">close</i></span>
+                   <p>Internet addictions are relatively new, so many people don't know what it is. Learn about the causes and signs and symptoms of internet addiction and what treatment options exist.</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+       </div>`;
+
+         var replace1=`<div class="row">
+                   <ul class="collapsible" data-collapsible="accordion">
+                     <li>
+                       <div class="collapsible-header row">
+                           <div class="col s11" style="font-size:3vw;">
+                             Settings
+                           </div>
+                           <div class="col s1" >
+                             <button id="closeset" style="background:none; border:none;">
+                               <i class="material-icons">close</i>
+                             </button>
+                           </div>
+                       </div>
+                     </li>
+                     <li>
+                       <div class="collapsible-header">
+                         <i class="large material-icons">delete</i>
+                       <h5>Deactivate your account </h5>
+                       </div>
+                       <div class="collapsible-body">
+                         <h5>Are you sure you wish to delete your account ?</h5>
+                         <button id="delete"> Yes </button>
+                       </div>
+                     </li>
+
+                     <li>
+                       <div class="collapsible-header">
+                         <i class="large material-icons">edit</i>
+                         <h5>Modify your details</h5>
+                       </div>
+                       <div class="collapsible-body">
+                         <div>
+                           <h3>Enter your details </h3>
+                             <div class="row">
+                               <form action="/user/modify" method="post" class="col s12">
+                                 <div class="row">
+                                   <div class="input-field col s6">
+                                     <input id="first_name" type="text" class="validate" name="fname">
+                                     <label for="first_name">First Name</label>
+                                   </div>
+                                   <div class="input-field col s6">
+                                     <input id="last_name" type="text" class="validate" name="lname">
+                                     <label for="last_name">Last Name</label>
+                                   </div>
+                                 </div>
+                                 <div class="row">
+                                   <div class="input-field col s12">
+                                     <input id="email2" type="email" class="validate">
+                                     <label for="email">Email</label>
+                                   </div>
+                                 </div>
+                                 <div class="row">
+                                   <div class="input-field col s12">
+                                     <input id="username" type="text" class="validate" name="username" value = "dfdf" disabled>
+                                     <label for="Username">Username</label>
+                                   </div>
+                                 </div>
+                                 <div class="row">
+                                   <div class="input-field col s12">
+                                     <input id="password" type="password" class="validate" name="password">
+                                     <label for="password">Password</label>
+                                   </div>
+                                 </div>
+                                 <div class="row">
+                                   <div class="input-field col s12">
+                                     <input id="modify" class="submit" type="submit">
+                                   </div>
+                                 </div>
+                               </form>
+                             </div>
+                           </div>
+                         </div>
+                       </li>
+                     </ul>
+                   </div>`;
+         $('#logout').click(function(){
+           $.get({
+             url:'/logout',
+             success:function(data){
+               window.location=data;
+             }
+           });
+         });
+         $('#settings').click(function(){
+           $('#text').html(replace1);
+         });
+         $('#delete').click(function(){
+           $.post({
+             url:'/user/delete',
+             data:myuser,
+             success:function(data){
+               window.location=data;
+             }
+           });
+         });
+         $('#closeset').click(function(){
+           $('#text').html(replace2);
+         });
+       }
+    </script>
+  </body>
+</html>

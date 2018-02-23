@@ -49,7 +49,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script>
-
         window.onload=function(){
           $('.dropdown-toggle').dropdown();
            window.myuser=JSON.parse($('#a').html());
@@ -63,7 +62,7 @@
            function fetch(){
              if(chat){
             if(myuser.hasOwnProperty('age'))
-              $.post({url:`http://localhost:${myuser.port}/user/fetch`, data:{uid:myuser.userid},success:function(data){
+              $.post({url:`/user/fetch`, data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -87,7 +86,7 @@
                 localStorage.setItem('history',JSON.stringify(t));
               },complete:function(){setTimeout(fetch,1000);}});
             else
-              $.post({url:`http://localhost:${myuser.port}/psych/fetch`, data:{uid:myuser.userid},success:function(data){
+              $.post({url:`/psych/fetch`, data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -163,7 +162,8 @@
 });
           window.send=function(text){
             if(myuser.hasOwnProperty('age')&& dest!=""){
-              $.post({url:`http://localhost:${myuser.port}/user/send`,data:{source:myuser.userid,dest:dest,content:text},success:function(data){
+              console.log("came here");
+              $.post({url:`/user/send`,data:{source:myuser.userid,dest:dest,content:text},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 control = '<li style="width:100%">' +
                           '<div class="msj macro">' +
@@ -183,7 +183,7 @@
               }});
             }
             else{
-              $.post({url:`http://localhost:${myuser.port}/psych/send`,data:{source:myuser.userid,dest:dest,content:text},success:function(data){
+              $.post({url:`/psych/send`,data:{source:myuser.userid,dest:dest,content:text},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 control = '<li style="width:100%">' +
                           '<div class="msj macro">' +
@@ -208,17 +208,20 @@
             $('#search').remove();
           }
           window.set=function(name){
-            dest=name;
+            console.log(name);
+            window.dest=name;
+            console.log(dest);
             var t = JSON.parse(localStorage.getItem('history'));
             if(!(t.hasOwnProperty(name)))
             {
               t[name] = [];
               localStorage.setItem('history',JSON.stringify(t));
-              window.location=window.location.href;
+              var g=JSON.parse(localStorage.getItem('history')) || {};
+              for (var uid in g){
+                 $('#chats').append(`<button type="button" class="list-group-item list-group-item-action"> &nbsp; <strong>${uid}</strong> &nbsp; </button>`);
+              }
             }
-            else{
-              dischat(false);
-            }
+            dischat(false);
           }
           $('#dropdownMenu2').click(function(){
             $.get({

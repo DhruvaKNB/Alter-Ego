@@ -1,5 +1,5 @@
 {
-  "name": "alter-ego-1",
+  "name": "alter-ego",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,19 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riyak1998/Alter-Ego-1.git"
+    "url": "git+https://github.com/DhruvaKNB/Alter-Ego.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/riyak1998/Alter-Ego-1/issues"
+    "url": "https://github.com/DhruvaKNB/Alter-Ego/issues"
   },
-  "homepage": "https://github.com/riyak1998/Alter-Ego-1#readme",
+  "homepage": "https://github.com/DhruvaKNB/Alter-Ego#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mysql": "^2.15.0",
     "passport": "^0.4.0",
-    "request": "^2.83.0"
+    "passport-local": "^1.0.0",
+    "request": "^2.83.0",
+    "session": "^0.1.0"
   }
 }

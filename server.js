@@ -1,5 +1,4 @@
 const express=require('express');
-const execute =require('child_process');
 const app=express();
 const request = require('request');
 const sql = require('mysql');
@@ -26,8 +25,6 @@ app.use(bodyParser({extended:true}));
 app.use(session({secret:"cat is here"}));     ///it can be anything
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(passport1.initialize());
-// app.use(passport1.session());
 let port=process.env.PORT || 5000;
 let connection=sql.createConnection(config);
 app.listen(port,function(){
@@ -65,11 +62,11 @@ app.post("/signup/psych",function(req,res){
     let query=`insert into ?? values(?,?,?,?,?)`;
     connection.query(sql.format(query,['psychiatrists',req.body.fname,req.body.lname,req.body.userid,data,req.body.regno]),function(err,data){
       if(err){
-        res.render('home.ejs');
+        res.render('home.ejs',{port:{port:port}});
         console.log(err);
       }
       else
-        res.render('home.ejs');
+        res.render('home.ejs',{port:{port:port}});
     });
   });
 });
@@ -80,11 +77,11 @@ app.post("/signup/user",function(req,res){
     let query=`insert into ?? values(?,?,?,?,?)`;
     connection.query(sql.format(query,['users',req.body.fname,req.body.lname,req.body.userid,data,req.body.age]),function(err,data){
       if(err){
-        res.render('home.ejs');
+        res.render('home.ejs',{port:{port:port}});
         console.log(err);
       }
       else
-        res.render('home.ejs');
+        res.render('home.ejs',{port:{port:port}});
     });
   });
 });
@@ -157,6 +154,7 @@ app.post('/user/send',function(req,res){
     });
   });
 });
+
 app.post('/user/fetch',function(req,res){
   console.log("hi");
   connection.beginTransaction(function(err){
@@ -182,6 +180,7 @@ app.post('/user/fetch',function(req,res){
     });
   });
 });
+
 app.post('/psych/send',function(req,res){
   console.log("hi");
   connection.beginTransaction(function(err){
@@ -197,6 +196,7 @@ app.post('/psych/send',function(req,res){
     });
   });
 });
+
 app.post('/psych/fetch',function(req,res){
   console.log("hi");
   connection.beginTransaction(function(err){
@@ -222,23 +222,23 @@ app.post('/psych/fetch',function(req,res){
     });
   });
 });
-app.get('/logout',function(req,res){
 
+app.get('/logout',function(req,res){
   req.logout();
-  res.send(`http://localhost:${port}/`);
+  res.send(`done`);
 });
 app.get('/',function(req,res){
   res.render('home.ejs',{port:{port:port}});
-})
+});
 app.get('/index',function(req,res){
   console.log(req.user);
   // res.render('index.ejs',{user:req.user});
   res.render('profile.ejs',{user:req.user});
-})
+});
 app.get('/user/message',function(req,res){
   // res.render('index.ejs',{user:req.user});
   console.log(req.user);
-  res.send(`http://localhost:${port}/index2`);
+  res.send(`done`);
 });
 app.get('/index2',function(req,res){
   console.log(req.user);
@@ -246,11 +246,73 @@ app.get('/index2',function(req,res){
 });
 app.post('/user/delete',function(req,res){
   console.log(req.body);
-  res.send(`http://localhost:${port}/`);
+  connection.beginTransaction(function(err){
+    if(err){console.log(err);res.sendStatus(404);}
+    else{
+      let query = 'delete from ?? where ??=?';
+      if(req.body.age!=null){
+          console.log("user");
+          connection.query(sql.format(query,['users','userid',req.body.userid]),function(err,data,fields){
+          if(err){connection.rollback; console.log(err); res.sendStatus(404);}
+            connection.commit(function(err){
+              if(err){connection.rollback; console.log(err); res.sendStatus(404);}
+              console.log(data);
+              req.logout();
+              res.send(`done`);
+            });
+        });
+      }
+      else{
+          console.log("psych");
+          connection.query(sql.format(query,['psychiatrists','userid',req.body.userid]),function(err,data,fields){
+          if(err){connection.rollback; console.log(err); res.sendStatus(404);}
+            connection.commit(function(err){
+              if(err){connection.rollback; console.log(err); res.sendStatus(404);}
+              console.log(data);
+              req.logout();
+              res.send(`done`);
+            });
+        });
+      }
+    }
+  });
 });
 app.post('/user/modify',function(req,res){
-  console.log(req.body);
-  res.sendStatus(200);
+  if(req.body.hasOwnProperty('age'))
+  {
+    connection.beginTransaction(function(err){
+      if(err) {console.log(err); res.sendStatus(404);}
+      let query = 'update ?? set ?? = ? , ?? = ? , ?? = ? , ?? = ? where ?? = ?';
+      bcrypt.hash(req.body.password,2,function(err,data){
+        if(err) {console.log(err);res.sendStatus(404);}
+        connection.query(sql.format(query,['users','fname',req.body.fname,'lname',req.body.lname,'pwd',data,'age',req.body.age,'userid',req.body.username]),function(err,data,fields){
+          if(err) {console.log(err);connection.rollback(function(){res.sendStatus(404);});}
+          connection.commit(function(err){
+            if(err){console.log(err);connection.rollback(function(){res.sendStatus(404);});}
+            req.logout();
+            res.render('home.ejs',{port:{port:port}});
+          });
+        });
+      });
+    });
+  }
+  else {
+    connection.beginTransaction(function(err){
+      if(err) {console.log(err); res.sendStatus(404);}
+      let query = 'update ?? set ?? = ? , ?? = ? , ?? = ? where ?? = ?';
+      bcrypt.hash(req.body.password,2,function(err,data){
+        if(err) {console.log(err);res.sendStatus(404);}
+        connection.query(sql.format(query,['psychiatrists','fname',req.body.fname,'lname',req.body.lname,'pwd',data,'userid',req.body.username]),function(err,data,fields){
+          if(err) {console.log(err);connection.rollback(function(){res.sendStatus(404);});}
+          connection.commit(function(err){
+            if(err){console.log(err);connection.rollback(function(){res.sendStatus(404);});}
+            req.logout();
+            res.render('home.ejs',{port:{port:port}});
+          });
+        });
+      });
+    });
+  }
 });
 app.get('/getpsych',function(req,res){
   console.log(req);

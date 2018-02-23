@@ -48,81 +48,82 @@
 
         <div class="col s12 m9" id="text">
           <div class="row">
-                              <ul class="collapsible" data-collapsible="accordion">
-                                <li>
-                                  <div class="collapsible-header row">
-                                      <div class="col s11" style="font-size:3vw;">
-                                        Settings
-                                      </div>
-                                      <div class="col s1" >
-                                        <button id="closeset" style="background:none; border:none;">
-                                          <i class="material-icons">close</i>
-                                        </button>
-                                      </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div class="collapsible-header">
-                                    <i class="large material-icons">delete</i>
-                                  <h5>Deactivate your account </h5>
-                                  </div>
-                                  <div class="collapsible-body">
-                                    <h5>Are you sure you wish to delete your account ?</h5>
-                                    <button id="delete"> Yes </button>
-                                  </div>
-                                </li>
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header row">
+                    <div class="col s11" style="font-size:3vw;">
+                      Settings
+                    </div>
+                    <div class="col s1" >
+                      <button id="closeset" style="background:none; border:none;">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </div>
+                </div>
+              </li>
+              <li>
+                <div class="collapsible-header">
+                  <i class="large material-icons">delete</i>
+                <h5>Deactivate your account </h5>
+                </div>
+                <div class="collapsible-body">
+                  <h5>Are you sure you wish to delete your account ?</h5>
+                  <button id="delete"> Yes </button>
+                </div>
+              </li>
 
-                                <li>
-                                  <div class="collapsible-header">
-                                    <i class="large material-icons">edit</i>
-                                    <h5>Modify your details</h5>
-                                  </div>
-                                  <div class="collapsible-body">
-                                    <div>
-                                      <h3>Enter your details </h3>
-                                        <div class="row">
-                                          <form action="/user/modify" method="post" class="col s12">
-                                            <div class="row">
-                                              <div class="input-field col s6">
-                                                <input id="first_name" type="text" class="validate" name="fname">
-                                                <label for="first_name">First Name</label>
-                                              </div>
-                                              <div class="input-field col s6">
-                                                <input id="last_name" type="text" class="validate" name="lname">
-                                                <label for="last_name">Last Name</label>
-                                              </div>
-                                            </div>
-                                            <div class="row">
-                                              <div class="input-field col s12">
-                                                <input id="email2" type="email" class="validate" name="email">
-                                                <label for="email">Email</label>
-                                              </div>
-                                            </div>
-                                            <div class="row">
-                                              <div class="input-field col s12">
-                                                <% var username = user.userid %>
-                                                <input id="username" type="text" class="validate" name="username" value = <%= username %> readonly >
-                                                <label for="Username">Username</label>
-                                              </div>
-                                            </div>
-                                            <div class="row">
-                                              <div class="input-field col s12">
-                                                <input id="password" type="password" class="validate" name="password">
-                                                <label for="password">Password</label>
-                                              </div>
-                                            </div>
-                                            <div class="row">
-                                              <div class="input-field col s12">
-                                                <input id="modify" class="submit" type="submit">
-                                              </div>
-                                            </div>
-                                          </form>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </li>
-                                </ul>
-                              </div>
+              <li>
+                <div class="collapsible-header">
+                  <i class="large material-icons">edit</i>
+                  <h5>Modify your details</h5>
+                </div>
+                <div class="collapsible-body">
+                  <div>
+                    <h3>Enter your details </h3>
+                      <div class="row">
+                        <form action="/user/modify" method="post" class="col s12">
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input id="first_name" type="text" class="validate" name="fname">
+                              <label for="first_name">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                              <input id="last_name" type="text" class="validate" name="lname">
+                              <label for="last_name">Last Name</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <% var username = user.userid %>
+                              <input id="username" type="text" class="validate" name="username" value = <%= username %> readonly >
+                              <label for="Username">Username</label>
+                            </div>
+                          </div>
+                          <% let age =0; if(user.hasOwnProperty('age')){ age = user.age} %>
+                          <div id="age" class="row">
+                            <div class="input-field col s12">
+                              <input type="text" class="validate" name="age" value = <%= age %>  >
+                              <label for="Age">Age</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="password" type="password" class="validate" name="password">
+                              <label for="password">Password</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="modify" class="submit" type="submit">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
         </div>  <!--  text -->
       </div>
     </div>
@@ -138,11 +139,17 @@
       window.onload=function(){
         window.myuser=JSON.parse($('#a').html());
         $('#a').remove();
+        if(!(myuser.hasOwnProperty('age')))
+          $('#age').remove();
          $('#msg').click(function(){
            $.get({
              url:'/user/message',
              success:function(data){
-               window.location=data;
+               if(data=='done')
+               {
+                 var t = window.location.href.slice(0,window.location.href.length-5);
+                 window.location = t + "index2";
+               }
              }
            });
          });
@@ -213,7 +220,11 @@
            $.get({
              url:'/logout',
              success:function(data){
-               window.location=data;
+               if(data=='done')
+               {
+                  var t= window.location.href;
+                  window.location=t.slice(0,t.length-5);  ///i ka index
+               }
              }
            });
          });
@@ -225,7 +236,13 @@
              url:'/user/delete',
              data:myuser,
              success:function(data){
-               window.location=data;
+               console.log("okk");
+               console.log(data);
+               if(data=='done')
+               {
+                  var t= window.location.href;
+                  window.location=t.slice(0,t.length-5);  ///i ka index
+               }
              }
            });
          });

@@ -63,6 +63,8 @@
              if(chat){
             if(myuser.hasOwnProperty('age'))
               $.post({url:`/user/fetch`, data:{uid:myuser.userid},success:function(data){
+                if(data)
+                  console.log(data);
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -84,7 +86,7 @@
                   }
                 }
                 localStorage.setItem('history',JSON.stringify(t));
-              },complete:function(){setTimeout(fetch,1000);}});
+              },complete:function(){fetch();}});
             else
               $.post({url:`/psych/fetch`, data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};

@@ -8,7 +8,7 @@ const passportLocal=require('passport-local').Strategy;
 const session=require('express-session');
 const bcrypt=require('bcrypt');
 let config={
-  "host":'localhost',
+  "host":'epiphany.cqaijujxrl4p.us-east-2.rds.amazonaws.com',
   "user":'Dhruva',
   "password":'123456789',
   "database":'epiphany'
@@ -140,7 +140,6 @@ passport.deserializeUser(function(id,done){
     }
 } );
 app.post('/user/send',function(req,res){
-  console.log("hi");
   connection.beginTransaction(function(err){
     if(err) throw err;
     let query='insert into ?? values(?,?,?,?)';
@@ -148,7 +147,7 @@ app.post('/user/send',function(req,res){
       if(err){console.log(err);connection.rollback(function(){console.log("error");});}
       else connection.commit(function(err){
           if(err){console.log(err);connection.rollback(function(){console.log("error")});}
-          else console.log("sent");
+          else console.log("sent by user");
           res.sendStatus(200);
       });
     });
@@ -156,7 +155,6 @@ app.post('/user/send',function(req,res){
 });
 
 app.post('/user/fetch',function(req,res){
-  console.log("hi");
   connection.beginTransaction(function(err){
     if(err) {res.sendStatus(404);console.log(err);}
     let query = 'select ??,?? from ?? where ??=? order by ??';
@@ -182,7 +180,6 @@ app.post('/user/fetch',function(req,res){
 });
 
 app.post('/psych/send',function(req,res){
-  console.log("hi");
   connection.beginTransaction(function(err){
     if(err) console.log(err);
     let query='insert into ?? values(?,?,?,?)';
@@ -198,7 +195,6 @@ app.post('/psych/send',function(req,res){
 });
 
 app.post('/psych/fetch',function(req,res){
-  console.log("hi");
   connection.beginTransaction(function(err){
     if(err) {res.sendStatus(404);console.log(err);}
     let query = 'select ??,?? from ?? where ??=? order by ??';

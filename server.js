@@ -1,6 +1,7 @@
 const express=require('express');
 const execute =require('child_process');
 const app=express();
+const request = require('request');
 const sql = require('mysql');
 const bodyParser=require('body-parser');
 const passport =require('passport');
@@ -27,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // app.use(passport1.initialize());
 // app.use(passport1.session());
-let port=5000;
+let port=process.env.PORT || 5000;
 let connection=sql.createConnection(config);
 app.listen(port,function(){
   console.log("Server is Running");
@@ -123,6 +124,7 @@ passport.deserializeUser(function(id,done){
         isd.lname=result[0].lname;
         isd.userid=result[0].userid;
         isd.age=result[0].age;
+        isd.port=port;
         return done(null,isd);
       }
     });
@@ -134,6 +136,7 @@ passport.deserializeUser(function(id,done){
           isd.lname=result[0].lname;
           isd.userid=result[0].userid;
           isd.regno=result[0].regno;
+          isd.port=port;
           return done(null,isd);
         }
     });
@@ -225,7 +228,7 @@ app.get('/logout',function(req,res){
   res.send(`http://localhost:${port}/`);
 });
 app.get('/',function(req,res){
-  res.render('home.ejs');
+  res.render('home.ejs',{port:{port:port}});
 })
 app.get('/index',function(req,res){
   console.log(req.user);
@@ -234,9 +237,11 @@ app.get('/index',function(req,res){
 })
 app.get('/user/message',function(req,res){
   // res.render('index.ejs',{user:req.user});
+  console.log(req.user);
   res.send(`http://localhost:${port}/index2`);
 });
 app.get('/index2',function(req,res){
+  console.log(req.user);
   res.render('index.ejs',{user:req.user});
 });
 app.post('/user/delete',function(req,res){
@@ -246,4 +251,18 @@ app.post('/user/delete',function(req,res){
 app.post('/user/modify',function(req,res){
   console.log(req.body);
   res.sendStatus(200);
+});
+app.get('/getpsych',function(req,res){
+  console.log(req);
+  connection.beginTransaction(function(err){
+    if(err) {res.sendStatus(404);console.log(err);}
+    let query = 'select ?? from ??';
+    connection.query(sql.format(query,["userid","psychiatrists"]),function(err,data,fields){
+      if(err){connection.rollback; console.log(err); res.sendStatus(404);}
+        connection.commit(function(err){
+          if(err){connection.rollback; console.log(err); res.sendStatus(404);}
+          res.send(data);
+        });
+    });
+  });
 });

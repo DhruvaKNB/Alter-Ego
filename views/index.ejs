@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <link href="/style.css" type="text/css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <body id="ab">
       <div class="container" style="width:80%">
@@ -13,13 +13,22 @@
             <div class="row">
               <h1> <%= user.userid %> </h1>
             </div>
+            <div class="row" id="search">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Search psychiatrists
+                </button>
+                <div class="dropdown-menu" id="dropdown1" aria-labelledby="dropdownMenu2">
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div id="chats" class="list-group">
               </div>
             </div>
           </div>
             <div id="title" class="col-sm-9 frame" style="box-shadow: 1px 1px 21px -2px rgba(0,0,0,0.75);">
-                <ul></ul>
+                <ul id="chatbox"></ul>
                 <div>
                     <div class="msj-rta macro" style="margin:auto">
                         <div class="text text-r" style="background:whitesmoke !important">
@@ -37,8 +46,12 @@
         src="http://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script>
+
         window.onload=function(){
+          $('.dropdown-toggle').dropdown();
            window.myuser=JSON.parse($('#a').html());
            $('#a').remove();
            window.chat=true;
@@ -50,7 +63,7 @@
            function fetch(){
              if(chat){
             if(myuser.hasOwnProperty('age'))
-              $.post({url:"http://localhost:5000/user/fetch", data:{uid:myuser.userid},success:function(data){
+              $.post({url:`http://localhost:${myuser.port}/user/fetch`, data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -74,7 +87,7 @@
                 localStorage.setItem('history',JSON.stringify(t));
               },complete:function(){setTimeout(fetch,1000);}});
             else
-              $.post({url:"http://localhost:3000/psych/fetch", data:{uid:myuser.userid},success:function(data){
+              $.post({url:`http://localhost:${myuser.port}/psych/fetch`, data:{uid:myuser.userid},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 for(let i=0;i<data.length;i++){
                   if(data[i].source==dest){
@@ -103,10 +116,11 @@
           window.stop=function(){
             chat=false;
           }
-          $('.list-group-item').click(function(){
-            $('ul').html('');
-            dest=$(this).children().html();
-            console.log(dest);
+          window.dischat =function(mode){
+            $('#chatbox').html('');
+            if(mode){
+              dest=$(this).children().html();
+            }
             var control = "";
             var i=JSON.parse(localStorage.getItem('history'));
             console.log(i[dest]);
@@ -130,9 +144,13 @@
                            '<div class="avatar" style="padding:0px 0px 0px 10px !important"></div>' +
                      '</li>';
        }
-       $("ul").append(control);
+       $("#chatbox").append(control);
               }
             }
+          }
+          $('.list-group-item').click(function(){
+              var g = dischat.bind($(this),true);
+              g();
           });
           $(".mytext").on("keyup", function(e){
     if (e.which == 13){
@@ -145,7 +163,7 @@
 });
           window.send=function(text){
             if(myuser.hasOwnProperty('age')&& dest!=""){
-              $.post({url:"http://localhost:5000/user/send",data:{source:myuser.userid,dest:dest,content:text},success:function(data){
+              $.post({url:`http://localhost:${myuser.port}/user/send`,data:{source:myuser.userid,dest:dest,content:text},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 control = '<li style="width:100%">' +
                           '<div class="msj macro">' +
@@ -165,7 +183,7 @@
               }});
             }
             else{
-              $.post({url:"http://localhost:3000/psych/send",data:{source:myuser.userid,dest:dest,content:text},success:function(data){
+              $.post({url:`http://localhost:${myuser.port}/psych/send`,data:{source:myuser.userid,dest:dest,content:text},success:function(data){
                 var t=JSON.parse(localStorage.getItem('history')) || {};
                 control = '<li style="width:100%">' +
                           '<div class="msj macro">' +
@@ -186,7 +204,37 @@
             }
           }
           fetch(myuser,chat);
+          if(!(myuser.hasOwnProperty('age'))){
+            $('#search').remove();
+          }
+          window.set=function(name){
+            dest=name;
+            var t = JSON.parse(localStorage.getItem('history'));
+            if(!(t.hasOwnProperty(name)))
+            {
+              t[name] = [];
+              localStorage.setItem('history',JSON.stringify(t));
+              window.location=window.location.href;
+            }
+            else{
+              dischat(false);
+            }
+          }
+          $('#dropdownMenu2').click(function(){
+            $.get({
+              url:'/getpsych',
+              success:function(data){
+                $('#dropdown1').html('');
+                data.forEach(function(a,b,c){
+                  console.log(a.userid);
+                  $('#dropdown1').append(`<button class="dropdown-item" onclick="set('${a.userid}')" type="button">${a.userid}</button>`);
+                });
+              }
+            })
+          });
+
         };
+
         </script>
     </body>
 </html>
